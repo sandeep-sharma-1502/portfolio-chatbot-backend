@@ -1,34 +1,36 @@
-import os
-import warnings
 from dotenv import load_dotenv
-
-# Load environment variables
 load_dotenv()
 
-# Clean HuggingFace logs (optional but recommended)
-os.environ["HF_HUB_DISABLE_PROGRESS_BARS"] = "1"
-warnings.filterwarnings("ignore", category=UserWarning)
-
+import os
+import threading
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.api.chat import router as chat_router
 
+from app.api.chat import router as chat_router
+from app.services.vector_store import _build_vector_store
+
+os.environ["HF_HUB_DISABLE_PROGRESS_BARS"] = "1"
 
 app = FastAPI(
-    title="Resume RAG Chatbot",
+    title="Portfolio AI Chatbot",
     version="1.0.0"
 )
 
-# Enable CORS (important if frontend is separate)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, restrict this to your frontend domain
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 app.include_router(chat_router)
+
+
+@app.on_event("startup")
+def warmup_in_background():
+    thread = threading.Thread(target=_build_vector_store, daemon=True)
+    thread.start()
 
 
 @app.get("/")

@@ -1,5 +1,7 @@
 # 🤖 Portfolio AI Chatbot (RAG-based)
 
+🚀 Live Demo: Coming Soon
+
 An AI-powered **Portfolio Chatbot** built using **FastAPI, LangChain, FAISS, HuggingFace Embeddings, and Groq LLM**.
 
 This chatbot works as a **personal portfolio assistant for Sandeep Sharma**, answering **only professional questions** about his skills, experience, projects, and background using **Retrieval-Augmented Generation (RAG)**.
@@ -86,7 +88,7 @@ portfolio-chatbot-backend/
 ### 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/portfolio-chatbot.git
+git clone https://github.com/sandeep-sharma-1502/portfolio-chatbot-backend.git
 cd portfolio-chatbot
 ```
 
