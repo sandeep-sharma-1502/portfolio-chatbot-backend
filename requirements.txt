@@ -1,0 +1,17 @@
+fastapi
+uvicorn
+gunicorn
+
+langchain
+langchain-core
+langchain-community
+langchain-text-splitters
+
+faiss-cpu
+sentence-transformers
+torch
+transformers
+
+PyMuPDF
+python-dotenv
+groq
